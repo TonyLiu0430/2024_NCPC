@@ -19,13 +19,13 @@ int prefix_gcdSum(const vector<factor> &factors, int64_t target) {
 }
 
 vector<factor> getFactors(int n) {
-	vector<factor> factors;
-	for (int i = 1; i * i <= n; i++) {
-		if (n % i == 0) {
-			factors.push_back(i);
+    vector<factor> factors;
+    for (int i = 1; i * i <= n; i++) {
+        if (n % i == 0) {
+            factors.push_back(i);
             if(n / i != i)  factors.push_back(n / i);
-		}
-	}
+        }
+    }
     sort(factors.begin(), factors.end(), [](const factor &a, const factor &b) {
         return a.num < b.num;
     });
@@ -38,7 +38,7 @@ vector<factor> getFactors(int n) {
         }
     }
 
-	return factors;
+    return factors;
 }
 
 
