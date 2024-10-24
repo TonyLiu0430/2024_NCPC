@@ -1,26 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define int int64_t
 
 struct factor {
-    int num = 0;
-    int contribution = 0;
+    int64_t num = 0;
+    int64_t contribution = 0;
     factor() = default;
-    factor(int x) : num(x), contribution(x) {}
+    factor(int64_t x) : num(x), contribution(x) {}
 };
 
-int prefix_gcdSum(const vector<factor> &factors, int64_t target) {
+int64_t prefix_gcdSum(const vector<factor> &factors, int64_t target) {
     int64_t res = 0;
-    for (int i = 0; i < factors.size(); i++) {
+    for (int64_t i = 0; i < factors.size(); i++) {
         res += (target / factors[i].num) * factors[i].contribution;
     }
     return res;
 }
 
-vector<factor> getFactors(int n) {
+vector<factor> getFactors(int64_t n) {
     vector<factor> factors;
-    for (int i = 1; i * i <= n; i++) {
+    for (int64_t i = 1; i * i <= n; i++) {
         if (n % i == 0) {
             factors.push_back(i);
             if(n / i != i)  factors.push_back(n / i);
@@ -30,8 +29,8 @@ vector<factor> getFactors(int n) {
         return a.num < b.num;
     });
     
-    for (int i = 0; i < factors.size(); i++) {
-        for (int j = 0; j < i; j++) {
+    for (int64_t i = 0; i < factors.size(); i++) {
+        for (int64_t j = 0; j < i; j++) {
             if (factors[i].num % factors[j].num == 0) {
                 factors[i].contribution -= factors[j].contribution;
             }
@@ -45,7 +44,7 @@ vector<factor> getFactors(int n) {
 signed main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int T;
+    int64_t T;
     cin >> T;
     while(T--) {
         int64_t n, m;
