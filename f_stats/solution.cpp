@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//steal
 struct state {
     int len{}, link{};
     array<int, 26> next{};
@@ -37,23 +38,19 @@ struct SAM {
                 st[cur].link = q;
             }
             else {
-                int clone_num = sz++;
-                auto &clone = st[clone_num];
-                auto &ps = st[p];
-                auto &qs = st[q];
-                clone.len = ps.len + 1;
-                clone.next = qs.next;
-                clone.link = qs.link;
+                int clone = sz++;
+                st[clone].len = st[p].len + 1;
+                st[clone].next = st[q].next;
+                st[clone].link = st[q].link;
                 while(p != -1 && st[p].next[c] == q) {
-                    st[p].next[c] = clone_num;
+                    st[p].next[c] = clone;
                     p = st[p].link;
                 }
-                st[q].link = st[cur].link = clone_num;
+                st[q].link = st[cur].link = clone;
             }
         }
         last = cur;
     }
-
 };
 
 int main() {
