@@ -27,7 +27,7 @@ int main() {
         for (int i = 1; i < nums.size() - 1; i++ ) {
             auto a = st.upper_bound(right[i + 1]);
             if(a != st.end() && check(nums[*a], nums[i], nums[right[i + 1]])) {
-                cout << "yes " << *a << " " << i << " " << right[i + 1] << "\n";
+                cout << "yes " << *a + 1 << " " << i + 1 << " " << right[i + 1] + 1 << "\n";
                 found = 1;
                 break;
             }
