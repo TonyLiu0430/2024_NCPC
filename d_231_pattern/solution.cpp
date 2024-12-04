@@ -21,14 +21,17 @@ int main() {
             right[i] = nums[right[i + 1]] < nums[i] ? right[i + 1] : i;
         }
         bool found = 0;
-        int mx = 0;
+        set<int, function<int(int, int)>> st([&nums](int a, int b) {
+            return nums[a] < nums[b];
+        });
         for (int i = 1; i < nums.size() - 1; i++ ) {
-            if(check(nums[mx], nums[i], nums[right[i + 1]])) {
-                cout << "yes " << mx << " " << i << " " << right[i + 1] << "\n";
+            auto a = st.upper_bound(right[i + 1]);
+            if(a != st.end() && check(nums[*a], nums[i], nums[right[i + 1]])) {
+                cout << "yes " << *a << " " << i << " " << right[i + 1] << "\n";
                 found = 1;
                 break;
             }
-            mx = nums[i] > nums[mx] ? i : mx;
+            st.insert(i);
         }
         if(not found) {
             cout << "no\n";
